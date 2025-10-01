@@ -3,12 +3,11 @@ name: Deploy React App to EC2
 on:
   push:
     branches: ["main"]
-
+    
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
-  steps:
+    steps: # This line was indented incorrectly
     - name: Checkout code
       uses: actions/checkout@v3
 
@@ -21,13 +20,13 @@ jobs:
       run: |
         npm install 
         npm run build
-
+        
     - name: copy build to EC2
       uses: appleboy/scp-action@v0.1.7
       with:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USER }}
-        key: ${{ secret.EC2_key }}
+        key: ${{ secrets.EC2_KEY }}
         source: "build/*"
         target: "/home/ec2-user/todo_build"
 
@@ -41,3 +40,4 @@ jobs:
           sudo rm -rf /usr/share/nginx/html/*
           sudo cp -r /home/ec2-user/todo_build/* /usr/share/nginx/html/
           sudo systemctl restart nginx
+
