@@ -34,7 +34,7 @@ export default function LocalStore() {
   };
   return (
     <>
-      <h1>Counter App</h1>
+      <h1>Counter App with CI/CD</h1>
       <h2>Counter: {counter}</h2>
       <button onClick={() => handleCounter("INC")}>Increase</button>
       <button onClick={() => handleCounter("DEC")}>Decrease</button>
